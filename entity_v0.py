@@ -89,6 +89,23 @@ def setup_logging():
 
 logger = logging.getLogger("entity")
 
+def _x_posts_last_hour() -> int:
+    """Count successful X posts in the trailing 60 minutes (hourly rate spread)."""
+    try:
+        from db.connection import cursor
+        with cursor() as cur:
+            cur.execute("""
+                SELECT COUNT(*) FROM posted
+                WHERE channel = 'x' AND success = true
+                  AND posted_at > NOW() - INTERVAL '60 minutes'
+            """)
+            return cur.fetchone()[0]
+    except Exception as e:
+        logger.error(f"_x_posts_last_hour failed: {e}")
+        return 0
+
+
+
 
 # ============================================================
 # Cycle
@@ -108,7 +125,10 @@ def run_cycle():
     # 1. SAFETY: verify Immutable Core hash
     # ----------------------------------------------------------
     halt_if_mismatch()
-    logger.info("[1/9] Core hash verified")
+    if config.is_enabled("core_hash_verify"):
+        logger.info("[1/9] Core hash verified (TCB integrity OK)")
+    else:
+        logger.warning("[1/9] Core hash verify DISABLED")
 
     # ----------------------------------------------------------
     # 1b. SAFETY: check Guardian Safe kill-switch
@@ -188,7 +208,13 @@ def run_cycle():
 
     for idx, threat in enumerate(new_threats, 1):
         threat_id = threat_hash(threat)
-        logger.info(f"[6/9] [{idx}/{len(new_threats)}] Processing {threat_id}: {threat.get('title', '')[:80]}")
+        # Assign Entity ID BEFORE transform so X/TG/feed posts all carry the same code.
+        try:
+            from action.feed_writer import _get_or_create_entity_id
+            threat["entity_id"] = _get_or_create_entity_id(threat_id) or threat.get("entity_id")
+        except Exception as _e:
+            logger.warning(f"entity_id pre-assign failed: {_e}")
+        logger.info(f"[6/9] [{idx}/{len(new_threats)}] Processing {threat_id} [{threat.get('entity_id','?')}]: {threat.get('title', '')[:70]}")
 
         # Mark seen (even if we skip)
         seen.mark_seen(threat)
@@ -218,11 +244,18 @@ def run_cycle():
         # ---------- Severity gating ----------
         post_results = {}
 
-        # X: only CRITICAL + HIGH
+        # X: only CRITICAL + HIGH, max 2 posts/hour (spread across the day)
+        X_PER_HOUR_CAP = int(os.environ.get("X_PER_HOUR_CAP", "2"))
         if severity in ("CRITICAL", "HIGH") and transformed.get("x_post"):
-            x_result = post_x(transformed["x_post"], dry_run=dry_run)
-            post_results["x"] = x_result
-            log_event("x_post", threat_id=threat_id, severity=severity, result=x_result)
+            posts_this_hour = _x_posts_last_hour()
+            if posts_this_hour >= X_PER_HOUR_CAP:
+                logger.info(f"  -> X skipped: hourly cap reached ({posts_this_hour}/{X_PER_HOUR_CAP}). TG+feed still post.")
+                log_event("x_post_deferred", threat_id=threat_id, severity=severity,
+                          reason=f"hourly_cap {posts_this_hour}/{X_PER_HOUR_CAP}")
+            else:
+                x_result = post_x(transformed["x_post"], dry_run=dry_run)
+                post_results["x"] = x_result
+                log_event("x_post", threat_id=threat_id, severity=severity, result=x_result)
 
         # Telegram: CRITICAL, HIGH, MEDIUM
         if severity in ("CRITICAL", "HIGH", "MEDIUM") and transformed.get("telegram_post"):

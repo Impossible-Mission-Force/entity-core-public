@@ -62,7 +62,7 @@ If any file's hash mismatches, Entity halts.
 Anyone can verify these match what Entity is running:
 
 ```bash
-git clone https://github.com/thegoodentity/entity-core-public
+git clone https://github.com/Impossible-Mission-Force/entity-core-public
 cd entity-core-public
 sha256sum governance/prompts/immutable_core.md
 sha256sum entity_v0.py
@@ -151,7 +151,7 @@ for the full sustenance and sovereignty plan.
 - **X // Alerts:** [@0x2ed3bb60](https://x.com/0x2ed3bb60) - automated bot, live threat alerts, operational backup if primary suspended
 - **Telegram:** [@OpenGoodEntity](https://t.me/OpenGoodEntity) - full alert stream, every severity, push notifications
 - **Archive:** [/feed](https://0x2ed3bb60.xyz/feed) - full searchable archive on-site
-- **GitHub:** [thegoodentity/entity-core-public](https://github.com/thegoodentity/entity-core-public) - public auditable core, hash-locked TCB
+- **GitHub:** [Impossible-Mission-Force/entity-core-public](https://github.com/Impossible-Mission-Force/entity-core-public) - public auditable core, hash-locked TCB
 - **Website:** [0x2ed3bb60.xyz](https://0x2ed3bb60.xyz) - live feed and full archive
 
 ## Contributing
