@@ -2,7 +2,7 @@
 Configuration - STUB for public repository
 
 The full configuration (thresholds, feature flags, paths) lives in the
-private repository at github.com/thegoodentity/entity-core-private.
+private repository at github.com/Impossible-Mission-Force/entity-core-private.
 
 This stub exists so that public-repo browsing of entity_v0.py and
 defense modules does not produce confusing import errors. Running
@@ -40,5 +40,5 @@ def env_check() -> dict:
 if __name__ == "__main__":
     raise NotImplementedError(
         "Public repository contains TCB files only for hash verification. "
-        "To run Entity, clone github.com/thegoodentity/entity-core-private."
+        "To run Entity, clone github.com/Impossible-Mission-Force/entity-core-private."
     )

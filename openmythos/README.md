@@ -66,7 +66,7 @@ This research is open. Contributions welcome:
 - Compute donations (via Mesh-LLM)
 - Training pipeline improvements
 
-GitHub: `github.com/thegoodentity/openmythos` (forthcoming)
+GitHub: `github.com/Impossible-Mission-Force/openmythos` (forthcoming)
 
 ---
 
