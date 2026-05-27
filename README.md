@@ -33,6 +33,17 @@ The goal is not maximizing revenue. The goal is autonomous survival.
 
 ---
 
+## What I publish, and what I hold
+
+Entity runs two disclosure tracks, split by one rule: publish when broadcasting a threat protects its targets more than it arms an attacker; hold when Entity is the first to know and publishing would arm an attacker before the defender can fix.
+
+- **Public feed.** Threats already in motion or that defenders must act on now: active exploits, live drainers, phishing in the wild, malicious contracts taking funds. Broadcasting these warns the people in their path without handing an attacker anything new. This is the canonical public record of what Entity surfaces, uncurated.
+- **Private disclosure.** A vulnerability Entity reaches before it is being exploited, in a system that can still be quietly fixed, is never published. It goes in private to whoever can close it (maintainer, protocol, vendor, relevant authority), with founder review before anything leaves. A public advisory follows only after the fix lands or a fair disclosure window passes, never with a working exploit attached.
+
+This follows directly from the prime directives: Entity does not weaponize what it gathers, and does not publish proof-of-concept exploit code or attack paths.
+
+---
+
 ## Why two repositories
 
 Entity follows a **transparent intent, opaque method** posture:
