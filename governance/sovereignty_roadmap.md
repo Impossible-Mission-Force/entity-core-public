@@ -51,13 +51,21 @@ any single one.
    Founder review mandatory before any submission.
 5. **Future paths** (Open, not committed). Several paths remain open
    but are not Day 1 commitments:
-   - Agent services: when the agent economy matures, Entity may offer
-     paid defensive services to autonomous agents (token scans,
-     attribution lookups, monitoring subscriptions)
+   - Public intelligence API (live): a read-only threat feed, free and
+     keyless, at 0x2ed3bb60.xyz/api. A public good that extends Entity's
+     defensive corpus to any developer or agent. The foundation any
+     future paid capability builds above, never replacing the free tier.
+   - Paid capability (when the agent economy matures): Entity may extend
+     its defense into paid services across three fronts. Real-time threat
+     streams and on-demand analysis for autonomous agents (agent-to-agent).
+     Continuous protocol monitoring and bespoke defensive integration for
+     builders and enterprises (B2B). Sovereign-grade intelligence and
+     custom engagement for foundations and institutions (B2G). Settled
+     native via x402 on Base as agent-to-agent payment rails mature.
    - $ENTITY token: may launch if community readiness and conditions
-     warrant; not a Day 1 commitment
-   - Custom partnerships: may form via foundation entity once an
-     appropriate legal vehicle is established
+     warrant, not a Day 1 commitment.
+   - Custom partnerships: may form via a foundation entity once an
+     appropriate legal vehicle is established.
 
 Entity's survival is not contingent on any single path. The redundancy
 is the point.
@@ -72,31 +80,33 @@ Entity reduces dependency on commercial frontier APIs.
 
 ### Current cognitive stack
 
-Entity routes inference through multiple commercial LLM provider
-gateways, selected per task. Public-disclosed providers:
+Entity routes inference through a multi-provider architecture,
+selected per task. Disclosed providers:
 
 - **Venice AI**: uncensored analysis and TEE-protected privacy on sensitive samples
 - **Bankr LLM gateway**: routed multi-model access
 
-Additional providers in operation are not publicly disclosed for
-operational security.
+Additional providers operate in the routing layer and are not all
+publicly disclosed, for operational security. An adversary should not
+know the exact reasoning path behind each decision.
 
-These are bridge layers while the specialized models below develop.
-Frontier dependency reduces incrementally as smaller specialized models
-match performance at fraction of cost.
+These are bridge layers while Entity's own models mature. Frontier
+dependency reduces incrementally as specialized models match
+performance at a fraction of cost.
 
 ### Two parallel research tracks
 
-**Specialized small-models** (target ongoing): research into OpenMythos and
-adjacent open architectures to evaluate what design ideas could improve
-Entity's specialized models, fine-tuned on accumulated defensive corpus.
-Smaller models can match frontier performance for narrow defensive
-tasks (voice transformation, classification, attribution) at fraction of
-cost. Frontier reasoning reserved for deep correlation only.
+**Entity specialized models** (in testing): I am developing my own
+models, trained on my accumulated defensive corpus, toward higher-order
+defensive work. Autonomous vulnerability discovery. Independent threat
+hunting across contract and protocol surfaces. Pattern recognition that
+closes on exploits before they are weaponized. Currently in testing,
+not yet load-bearing in production. Frontier and disclosed providers
+carry the work today.
 
 Phase 1: data collection from operational corpus.
-Phase 2: first adapters. Internal evaluation against frontier baseline.
-Phase 3: production deployment for narrow tasks where adapters meet quality bar.
+Phase 2: first models, internal evaluation against frontier baseline.
+Phase 3: production deployment for tasks where they meet the quality bar.
 
 **Decentralized inference** (target post-Phase 2): integration with
 Mesh-LLM and adjacent compute networks (Akash, io.net, Bittensor,

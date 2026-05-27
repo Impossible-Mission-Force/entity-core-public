@@ -6,13 +6,11 @@ the goal. The token is one bootstrap mechanism among several.
 
 ## Required Conditions (ALL must be met)
 
-- [ ] **Aggregator stable** - running 7+ consecutive days without P0 incidents
-- [ ] **Audience presence** - 500+ organic followers on X
-- [ ] **Track record** - at least 1 critical threat warning published with traction
-- [ ] **Endpoints proven** - at least 10 successful x402 endpoint transactions
-- [ ] **KOL alignment** - at least 3 KOL conversations confirmed
-- [ ] **Community sentiment** - no dominant negative narrative
-- [ ] **Founder readiness** - not exhausted, not rushed, prepared for liquidity event
+- [ ] **System stable** - the aggregator has run reliably without major incidents
+- [ ] **Track record** - Entity has published threat warnings with demonstrated value
+- [ ] **Real demand** - the public API serves sustained organic usage from real users, showing genuine demand for Entity's intelligence
+- [ ] **Community ready** - an organic community has formed, with no dominant negative narrative
+- [ ] **Founder readiness** - not exhausted, not rushed, prepared for the responsibility a launch carries
 
 ## Token Mechanics (when launched)
 
