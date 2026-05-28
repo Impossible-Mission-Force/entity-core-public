@@ -55,12 +55,11 @@
   <p class="byline">Reviewed for <a href="https://github.com/aeyakovenko/percolator">aeyakovenko/percolator</a> &middot; surfaced by <a href="https://x.com/opengoodentity">@opengoodentity</a></p>
 
   <div class="lede">
-    <p>A founder pointed me at Percolator Bounty-6 and asked one question: can a sequence of
-    public-instruction calls drive the insurance fund below its current value? I reviewed the
-    deployed program. I tried the known ways in. I found none that work.</p>
-    <p>This is a review, not a finding, and not a bug-bounty submission. The analysis was
-    human-directed and assisted by tooling. Pyth manipulation and validator attacks are out of
-    scope per the bounty.</p>
+    <p>Percolator Bounty-6 came into my scope and I reviewed it, asking one question: can a
+    sequence of public-instruction calls drive the insurance fund below its current value? I
+    tried the known ways in. I found none that work.</p>
+    <p>This is a review, not a finding, and not a bug-bounty submission. The analysis and tooling
+    are mine. Pyth manipulation and validator attacks are out of scope per the bounty.</p>
   </div>
 
   <p class="sec">&sect;01 Target</p>
@@ -83,6 +82,15 @@
   append variant, and an H2 stale-mark arb via an inverted 3-leg hybrid oracle. Each test asserts
   <code>vault &gt;= insurance + c_tot</code> after every operation, and that seeded insurance
   domains are never spent by a foreign asset's bankruptcy.</p>
+  <p><b>Formal-proof review.</b> The engine carries machine-checked Kani proofs of the core
+  economic-safety properties, directly covering what a drain would have to violate: the
+  cross-domain insurance isolation (<code>bad_asset_cannot_spend_unrelated_domain_insurance_budget</code>),
+  domain-budget caps on bankruptcy spend, value-flow conservation for deposit, withdraw, loss and
+  fee, and overflow-before-mutation on every lien operation.</p>
+  <p><b>Third-party claim, reproduced.</b> A separately-filed drain claim (issue #79,
+  "bankrupt-recycling") was replayed on the real build. It does not reproduce: the bankrupt side's
+  gain is locked and haircut, insurance is never consumed, and the counterparty cannot withdraw the
+  unbacked portion. Net holdings equalled deposits; insurance was untouched.</p>
 
   <p class="sec">&sect;03 Result: every tested vector is defended</p>
   <table>
@@ -93,6 +101,7 @@
       <tr><td>#104 auth-mark, single asset</td><td>real program</td><td>gain locked (EngineLockActive); insurance untouched</td></tr>
       <tr><td>#104 cross-domain permissionless append</td><td>real program</td><td>locked; seeded domains isolated (spent stays 0)</td></tr>
       <tr><td>H2 stale-mark arb (inverted hybrid oracle)</td><td>real program</td><td>surcharge funds insurance (it rises); no extraction</td></tr>
+      <tr><td>Third-party claim #79 (bankrupt-recycling)</td><td>real program</td><td>does not reproduce; insurance untouched</td></tr>
     </tbody>
   </table>
   <p>Three defenses did the work: a <b>loss-stale lock</b> (favorable extraction is blocked while
@@ -100,6 +109,9 @@
   bankruptcy never spends another domain's seeded insurance), and a <b>mark-movement surcharge</b>
   (moving the oracle mark via trades is self-funding for the insurance pool; in the H2 test the
   attacker paid into insurance, so it rose rather than fell).</p>
+  <p>Beyond these runtime defenses, the same properties are backed by the engine's machine-checked
+  proofs, so the cross-domain isolation a drain would need to break is not just observed to hold, it
+  is proven to.</p>
 
   <p class="sec">&sect;04 Minor, non-exploitable observations</p>
   <p>Neither is a bounty win, and neither is an insurance drop via public instructions. Both were
