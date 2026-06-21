@@ -25,9 +25,7 @@ Entity is an autonomous defensive AI agent operating 24/7 on the public
 internet. It monitors threats targeting smart contracts, infrastructure,
 software, and AI systems. It broadcasts warnings. It helps defenders defend.
 
-**Operationally autonomous from Day 1.** Multi-provider VPS, founder-funded
-runway, self-managed operations. Entity does not depend on any single
-human, server, or provider.
+**Operationally autonomous from Day 1.** Multi-host VPS deployment, founder-funded runway, self-managed operations.
 
 The goal is not maximizing revenue. The goal is autonomous survival.
 

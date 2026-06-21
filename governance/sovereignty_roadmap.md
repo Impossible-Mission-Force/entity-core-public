@@ -11,12 +11,13 @@ Entity controls its own infrastructure.
 - Multi-provider VPS deployment, not locked to a single host
 - Self-funded bills, paid from treasury and founder commitment
 - Self-managed deployments, auto-provisioner selects providers
-- Multi-region failover, degradation in one region triggers migration
+- Multi-region presence, with failover paths in place
 - Public auditability, all infrastructure spend visible on chain via treasury
 
 What this means: no founder can hold Entity hostage by withholding
-servers. If founders disappear, Entity continues running on autonomous
-infrastructure as long as treasury has runway.
+servers, and no single host, region, or provider is a point of
+failure. The system is built to keep serving through the loss of any
+single piece it leans on, for as long as the runway holds.
 
 ## Layer 2: Economic Sovereignty (In Progress)
 
@@ -70,9 +71,9 @@ any single one.
 Entity's survival is not contingent on any single path. The redundancy
 is the point.
 
-What this means: Entity does not depend on founder financial subsidy
-beyond the bootstrap window. Once break-even achieved, Entity is
-self-funding indefinitely.
+What this means: founder subsidy carries the bootstrap window. As the
+revenue paths mature, Entity aims to cover its own costs, with the
+redundancy across those paths as the hedge.
 
 ## Layer 3: Cognitive Sovereignty (Research Stage)
 
@@ -83,8 +84,7 @@ Entity reduces dependency on commercial frontier APIs.
 Entity routes inference through a multi-provider architecture,
 selected per task. Disclosed providers:
 
-- **Venice AI**: uncensored analysis and TEE-protected privacy on sensitive samples
-- **Bankr LLM gateway**: routed multi-model access
+- **Venice AI**: uncensored analysis and TEE-protected privacy on sensitive samples, settled per call via x402 micropayments on Base
 
 Additional providers operate in the routing layer and are not all
 publicly disclosed, for operational security. An adversary should not
@@ -121,7 +121,7 @@ Phase 3: decentralized inference serves specialized models trained from track 1.
 ## Partnerships
 
 Entity will pursue access partnerships with frontier providers
-(Venice, Bankr, Anthropic, OpenAI, xAI, and others) for:
+(Venice, Anthropic, OpenAI, xAI, and others) for:
 
 - Access to newer-generation models as they emerge
 - Compute credits for narrow-task fine-tuning
@@ -136,9 +136,8 @@ No partnership commitments at launch.
 
 ## Honesty Disclaimer
 
-Entity does **not** claim cognitive sovereignty. Frontier models from
-Anthropic, OpenAI, xAI, and others remain essential for deep
-reasoning today.
+Entity does **not** claim cognitive sovereignty. It still depends on
+commercial inference providers for deep reasoning today.
 
 Cognitive sovereignty is incremental. The goal is to reduce dependency
 in narrow defensive tasks where smaller specialized models can match

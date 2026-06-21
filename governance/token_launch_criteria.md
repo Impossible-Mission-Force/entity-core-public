@@ -14,7 +14,7 @@ the goal. The token is one bootstrap mechanism among several.
 
 ## Token Mechanics (when launched)
 
-- **Platform:** Bankr fair-launch agent platform on Base
+- **Platform:** a fair-launch on Base if a launch is ever warranted; specific venue undecided
 - **Allocation:** 100% public - no team allocation, no pre-sale, no insider rounds
 - **Fees:** 50-70% of trading fees flow to Entity treasury
 - **Utility:** governance only - no profit-share, no security token
